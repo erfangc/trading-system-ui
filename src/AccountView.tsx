@@ -18,6 +18,7 @@ export function AccountView() {
 
     function closeOrderEntry() {
         setOrderEntryVisible(false);
+        window.location.reload();
     }
 
     useEffect(() => {
