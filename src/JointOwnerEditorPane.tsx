@@ -24,8 +24,6 @@ export function JointOwnerEditorPane({isOpen, formData, idx, onChange, onRequest
     const data = formData.jointOwners?.[idx];
     return (
         <SlidingPane
-            className="some-custom-class"
-            overlayClassName="some-custom-overlay-class"
             isOpen={isOpen}
             title="Joint Owner Form"
             subtitle="Tell us about this joint owner."
