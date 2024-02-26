@@ -63,3 +63,11 @@ export function modifyNestedPropertyByPath(data: object | Array<any>, path: stri
     curr[travelInstructions[instIdx]] = value;
     return data;
 }
+
+export function toAccountTypeFullDescription(input: string) {
+    if (input === 'I') {
+        return "Individual Account";
+    } else {
+        return "Unknown Account Type";
+    }
+}

@@ -5,6 +5,7 @@ import './index.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {NewAccount} from "./NewAccount.tsx";
 import {Home} from "./Home.tsx";
+import {AccountView} from "./AccountView.tsx";
 
 const router = createBrowserRouter([
     {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
             {
                 path: "new-account",
                 element: <NewAccount/>
+            },
+            {
+                path: "accounts/:accountNumber",
+                element: <AccountView/>
             },
             {
                 path: "/",

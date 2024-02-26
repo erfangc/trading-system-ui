@@ -2,14 +2,7 @@ import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {Account} from "./Account.tsx";
 import axios from "axios";
-
-function toName(input: string) {
-    if (input === 'I') {
-        return "Individual Account";
-    } else {
-        return "Unknown Account Type";
-    }
-}
+import {toAccountTypeFullDescription} from "./helper_functions.ts";
 
 export function Home() {
 
@@ -39,8 +32,10 @@ export function Home() {
                     <tbody>
                     {accounts?.map(account => (
                         <tr key={account.accountNumber}>
-                            <td className="py-3 px-4 border border-slate-300">{account.accountNumber}</td>
-                            <td className="py-3 px-4 border border-slate-300">{toName(account.accountType)}</td>
+                            <td className="py-3 px-4 border border-slate-300">
+                                <Link to={`/accounts/${account.accountNumber}`}>{account.accountNumber}</Link>
+                            </td>
+                            <td className="py-3 px-4 border border-slate-300">{toAccountTypeFullDescription(account.accountType)}</td>
                             <td className="py-3 px-4 border border-slate-300">{account.primaryOwner.firstName} {account.primaryOwner.lastName}</td>
                         </tr>
                     ))}
