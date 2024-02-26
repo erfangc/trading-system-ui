@@ -8,7 +8,7 @@
  * @param {*} value The new value to assign to the property.
  * @returns {Object|Array} The modified data structure.
  */
-export function modifyNestedPropertyByPath(data, path, value) {
+export function modifyNestedPropertyByPath(data: object | Array<any>, path: string, value: any): object | Array<any> {
     /*
     split path into by dot (/\./), for each segment further split by [\d+] if applicable
      */

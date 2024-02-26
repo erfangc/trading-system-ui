@@ -2,8 +2,6 @@ import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {Account} from "./Account.tsx";
 import axios from "axios";
-import {Simulate} from "react-dom/test-utils";
-import load = Simulate.load;
 
 function toName(input: string) {
     if (input === 'I') {
@@ -14,17 +12,17 @@ function toName(input: string) {
 }
 
 export function Home() {
-    
+
     const [accounts, setAccounts] = useState<Account[]>([]);
     const [loading, setLoading] = useState(true);
-    
+
     useEffect(() => {
         setLoading(true);
         axios.get(`http://localhost:8080/api/v1/accounts`)
             .then(resp => setAccounts(resp.data))
             .finally(() => setLoading(false));
     }, []);
-    
+
     return (
         <div className="mx-4">
             {
@@ -51,8 +49,8 @@ export function Home() {
             }
             {
                 accounts.length === 0 && loading === false
-                ? <p>There are no accounts currently open</p>
-                : null
+                    ? <p>There are no accounts currently open</p>
+                    : null
             }
             <br/>
             <button>

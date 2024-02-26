@@ -4,27 +4,47 @@ import {Account} from "./Account.tsx";
 import {modifyNestedPropertyByPath} from "./helper_functions.ts";
 import {JointOwnerEditorPane} from "./JointOwnerEditorPane.tsx";
 import axios from "axios";
+import {AccountCreationSuccess} from "./AccountCreationSuccess.tsx";
 
+/**
+ * Represents the NewAccount component, responsible for rendering
+ * the account creation form and handling its functionality.
+ */
 export function NewAccount() {
-
+    
     const [formData, setFormData] = useState<Account>({accountType: 'I'});
 
     const [isSubmitting, setIsSubmitting] = useState(false);
+
     const [submitError, setSubmitError] = useState<string | null>(null);
+
     const [success, setSuccess] = useState(false);
+
     const [showJointOwnerPane, setShowJointOwnerPane] = useState(false);
+
     const [currentJointOwnerIdx, setCurrentJointOwnerIdx] = useState(0);
 
+    /**
+     * Initializes the process of adding a new joint owner.
+     */
     function newJointOwner() {
         setShowJointOwnerPane(true);
         setCurrentJointOwnerIdx(formData.jointOwners.length);
     }
 
+    /**
+     * Removes a joint owner from the form data.
+     * @param {number} idx - Index of the joint owner to remove.
+     */
     function removeJointOwner(idx: number) {
         setCurrentJointOwnerIdx(0);
         setFormData({...formData, jointOwners: formData.jointOwners.filter((_, i) => i !== idx)});
     }
 
+    /**
+     * Opens the editing pane for an existing joint owner.
+     * @param {number} idx - Index of the joint owner to edit.
+     */
     function editJointOwner(idx: number) {
         setShowJointOwnerPane(true);
         setCurrentJointOwnerIdx(idx);
@@ -37,6 +57,7 @@ export function NewAccount() {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = event.target;
         const updatedValue = modifyNestedPropertyByPath(formData, name, value);
+        // @ts-ignore
         setFormData({...updatedValue});
     };
 
@@ -132,8 +153,10 @@ export function NewAccount() {
                                     ))
                                 }
                             </div>
-                            <button className="px-2 text-sm py-0.5 text-blue-600 border border-blue-600 rounded"
-                                    onClick={newJointOwner}>
+                            <button
+                                className="px-2 text-sm py-0.5 text-blue-600 border border-blue-600 rounded"
+                                onClick={newJointOwner}
+                            >
                                 + Joint Owner
                             </button>
                             <JointOwnerEditorPane
@@ -220,19 +243,8 @@ export function NewAccount() {
                     </button>
                 </fieldset>
             </form>
-            : 
-            <div className="mx-4 space-y-4">
-                <h1 className="text-2xl text-emerald-800">Your new account has been successfully created:</h1>
-                <div>
-                    <div className="space-x-2"><span className="font-bold">Account Number:</span><span>{formData?.accountNumber}</span></div>
-                    <div className="space-x-2"><span className="font-bold">Account Type:</span><span>Individual Account</span></div>
-                    <div className="space-x-2"><span className="font-bold">Primary Owner:</span><span>{formData?.primaryOwner?.firstName} {formData?.primaryOwner?.lastName}</span></div>
-                    <div className="space-x-2"><span className="font-bold">Primary Owner Tax ID:</span><span>{formData?.primaryOwner?.taxId}</span></div>
-                    {formData?.jointOwners?.length > 0 ?
-                        <div className="space-x-2"><span className="font-bold">Joint Owner:</span><span>{formData?.jointOwners[0]?.firstName} {formData?.jointOwners[0]?.lastName}</span></div> : null
-                    }
-                </div>
-            </div>
+            :
+            <AccountCreationSuccess formData={formData}/>
 
     );
 }
