@@ -7,4 +7,7 @@ interface Position {
     marketValue?: number;
     settledMarketValue?: number;
     costBasis?: number;
+    closePrice?: number;
+    dailyChangePercent?: number;
+    dailyChange?: number;
 }
