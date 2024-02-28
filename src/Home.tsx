@@ -32,7 +32,7 @@ export function Home() {
                     <tbody>
                     {accounts?.map(account => (
                         <tr key={account.accountNumber}>
-                            <td className="py-3 px-4 border border-slate-300">
+                            <td className="py-3 px-4 border border-slate-300 underline text-blue-700">
                                 <Link to={`/accounts/${account.accountNumber}`}>{account.accountNumber}</Link>
                             </td>
                             <td className="py-3 px-4 border border-slate-300">{toAccountTypeFullDescription(account.accountType)}</td>
