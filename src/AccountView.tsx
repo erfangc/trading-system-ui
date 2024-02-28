@@ -100,9 +100,9 @@ export function AccountView() {
                     <thead>
                     <tr className="bg-slate-100 text-slate-700">
                         <th className="py-3 px-4 text-left">Security ID</th>
-                        <th className="py-3 px-4 text-left">Quantity</th>
-                        <th className="py-3 px-4 text-left">Market Value</th>
-                        <th className="py-3 px-4 text-left">Close Price</th>
+                        <th className="py-3 px-4 text-right">Quantity</th>
+                        <th className="py-3 px-4 text-right">Market Value</th>
+                        <th className="py-3 px-4 text-right">Close Price</th>
                         <th className="py-3 px-4 text-right">Daily Price Change</th>
                         <th className="py-3 px-4 text-right">Daily Price Change %</th>
                     </tr>
@@ -114,11 +114,15 @@ export function AccountView() {
                         return (
                             <tr key={position.securityId}>
                                 <td className="py-3 px-4 border border-slate-300">{position.securityId}</td>
-                                <td className="py-3 px-4 border border-slate-300">{position.qty.toFixed(2)}</td>
-                                <td className="py-3 px-4 border border-slate-300">${position.marketValue?.toFixed(2)}</td>
-                                <td className="py-3 px-4 border border-slate-300">${position.closePrice?.toFixed(2)}</td>
-                                <td className={`py-3 px-4 border text-right border-slate-300 ${isNegative ? 'text-red-600' : 'text-green-500'}`}>{dailyChange?.toFixed(2)}</td>
-                                <td className={`py-3 px-4 border text-right border-slate-300 ${isNegative ? 'text-red-600' : 'text-green-500'}`}>{(position.dailyChangePercent)?.toFixed(2)}%</td>
+                                <td className="py-3 px-4 border border-slate-300 text-right">{position.qty.toFixed(2)}</td>
+                                <td className="py-3 px-4 border border-slate-300 text-right">${position.marketValue?.toFixed(2)}</td>
+                                <td className="py-3 px-4 border border-slate-300 text-right">${position.closePrice?.toFixed(2)}</td>
+                                <td className={`py-3 px-4 border text-right border-slate-300 ${isNegative ? 'text-red-600' : 'text-green-500'}`}>
+                                    {dailyChange ? dailyChange?.toFixed(2) : null}
+                                </td>
+                                <td className={`py-3 px-4 border text-right border-slate-300 ${isNegative ? 'text-red-600' : 'text-green-500'}`}>
+                                    {position.dailyChangePercent ? `${position.dailyChangePercent.toFixed(2)}%` : null}
+                                </td>
                             </tr>
                         );
                     })}
@@ -132,7 +136,7 @@ export function AccountView() {
                     <thead>
                     <tr className="bg-slate-100 text-slate-700">
                         <th className="py-3 px-4 text-left">Security ID</th>
-                        <th className="py-3 px-4 text-left">Quantity</th>
+                        <th className="py-3 px-4 text-right">Quantity</th>
                         <th className="py-3 px-4 text-left">Status</th>
                         <th className="py-3 px-4 text-left">Timestamp</th>
                     </tr>
@@ -142,7 +146,7 @@ export function AccountView() {
                         return (
                             <tr key={order.id}>
                                 <td className="py-3 px-4 border border-slate-300">{order.securityId}</td>
-                                <td className="py-3 px-4 border border-slate-300">{order.qty}</td>
+                                <td className="py-3 px-4 border border-slate-300 text-right">{order.qty}</td>
                                 <td className="py-3 px-4 border border-slate-300">{order.status}</td>
                                 <td className="py-3 px-4 border border-slate-300">{new Date(order.timestamp).toLocaleString()}</td>
                             </tr>
@@ -159,7 +163,7 @@ export function AccountView() {
                     <thead>
                     <tr className="bg-slate-100 text-slate-700">
                         <th className="py-3 px-4 text-left">Security ID</th>
-                        <th className="py-3 px-4 text-left">Quantity</th>
+                        <th className="py-3 px-4 text-right">Quantity</th>
                         <th className="py-3 px-4 text-left">Status</th>
                         <th className="py-3 px-4 text-left">Timestamp</th>
                     </tr>
@@ -169,7 +173,7 @@ export function AccountView() {
                         return (
                             <tr key={transaction.id}>
                                 <td className="py-3 px-4 border border-slate-300">{transaction.securityId}</td>
-                                <td className="py-3 px-4 border border-slate-300">{transaction.qty}</td>
+                                <td className="py-3 px-4 border border-slate-300 text-right">{transaction.qty}</td>
                                 <td className="py-3 px-4 border border-slate-300">{transaction.status}</td>
                                 <td className="py-3 px-4 border border-slate-300">{new Date(transaction.createdAt).toLocaleString()}</td>
                             </tr>
