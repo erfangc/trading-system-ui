@@ -40,7 +40,7 @@ export function AccountView() {
                 .then(resp => setTransactions(resp.data));
         }
     }, [accountNumber]);
-    
+
     useEffect(() => {
         if (accountNumber) {
             axios
@@ -52,6 +52,7 @@ export function AccountView() {
         }
     }, [accountNumber]);
 
+    const line2 = account?.primaryOwner?.mailingAddress?.line2;
     return (
         <main className="mx-4 space-y-8">
 
@@ -80,8 +81,14 @@ export function AccountView() {
                     <span>Address:</span>
                     <br/>
                     {account?.primaryOwner?.mailingAddress?.line1}
-                    <br/>
-                    {account?.primaryOwner?.mailingAddress?.line2 || null}
+                    {line2
+                        ?
+                        <>
+                            <br/>
+                            {line2}
+                        </>
+                        : null
+                    }
                     <br/>
                     <span>{account?.primaryOwner?.mailingAddress?.city} {account?.primaryOwner?.mailingAddress?.state}, {account?.primaryOwner?.mailingAddress?.zip}</span>
                 </p>
